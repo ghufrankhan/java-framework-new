@@ -15,6 +15,7 @@ public class BaseTest {
 
     protected static WebDriver driver;
 
+    // Sets the Browser and Base URL for the UI tests - called by the Hooks class
     public void setUp() {
         String browser = ConfigLoader.getBrowser();
         String baseUrl = ConfigLoader.getUiBaseUrl();
@@ -35,8 +36,10 @@ public class BaseTest {
                 break;
         }
 
+        // Maximize the browser window
         driver.manage().window().maximize();
 
+        // Navigate to the Base URL
         if (!baseUrl.isEmpty()) {
             driver.get(baseUrl);
         } else {
@@ -44,6 +47,7 @@ public class BaseTest {
         }
     }
 
+    // Takes a screenshot of the failed scenario and attaches it to the report
     public void takeScreenshot(Scenario scenario) {
         if (scenario.isFailed()) {
             byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
@@ -51,13 +55,14 @@ public class BaseTest {
         }
     }
 
-
+    // Quits the driver after each scenario
     public void tearDown() {
         if (driver != null) {
             driver.quit();
         }
     }
 
+    // Gets the driver for the UI tests
     public static WebDriver getDriver() {
         return driver;
     }

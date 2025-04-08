@@ -6,6 +6,7 @@ public class BaseTest {
 
     protected static String baseUrl;
 
+    // Sets the Base URL for the API tests - called by the Hooks class
     public void setUp() {
         baseUrl = ConfigLoader.getApiBaseUrl();
         if (baseUrl.isEmpty()) {
